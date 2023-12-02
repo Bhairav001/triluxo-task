@@ -30,8 +30,16 @@ bookRoutes.get("/",async(req,res)=>{
 })
 
 
-bookRoutes.patch("/update/:id",(req,res)=>{
-    console.log({msg:"book updated sucessfully"})
+bookRoutes.patch("/update/:id",async(req,res)=>{
+    const payload = req.body;
+    const bookID = req.params.id;
+    try {
+        await BookModel.findByIdAndUpdate({_id:bookID},payload);
+        res.send({msg:"book updated sucessfully"})
+        console.log({msg:"book updated sucessfully"})
+    } catch (error) {
+        console.log(error.message)
+    }
 })
 
 bookRoutes.delete("/delete/:id",(req,res)=>{
