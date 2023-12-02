@@ -4,7 +4,7 @@ const bookRoutes = express.Router();
 
 
 
-bookRoutes.post("/books",(req,res)=>{
+bookRoutes.post("/createBook",(req,res)=>{
     console.log({msg:"book added succesfully"})
 })
 
@@ -14,11 +14,11 @@ bookRoutes.get("/",(req,res)=>{
 })
 
 
-bookRoutes.patch("/books/:id",(req,res)=>{
+bookRoutes.patch("/update/:id",(req,res)=>{
     console.log({msg:"book updated sucessfully"})
 })
 
-bookRoutes.delete("/books/:id",(req,res)=>{
+bookRoutes.delete("/delete/:id",(req,res)=>{
     console.log({msg:"book deleted sucessfully"})
 })
 

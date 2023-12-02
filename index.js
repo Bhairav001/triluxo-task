@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 
-app.use("/book",bookRoutes);
+app.use("/books",bookRoutes);
 
 app.listen(process.env.PORT,async()=>{
     try {
