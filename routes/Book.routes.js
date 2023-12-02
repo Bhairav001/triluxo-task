@@ -42,8 +42,17 @@ bookRoutes.patch("/update/:id",async(req,res)=>{
     }
 })
 
-bookRoutes.delete("/delete/:id",(req,res)=>{
-    console.log({msg:"book deleted sucessfully"})
+bookRoutes.delete("/delete/:id",async(req,res)=>{
+    
+    const payload = req.body;
+    const bookID = req.params.id;
+    try {
+        await BookModel.findByIdAndDelete({_id:bookID},payload);
+        res.send({msg:"book deleted sucessfully"})
+        console.log({msg:"book deleted sucessfully"})
+    } catch (error) {
+        console.log(error.message)
+    }
 })
 
 module.exports={
