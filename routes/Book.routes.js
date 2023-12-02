@@ -1,11 +1,20 @@
 const express = require("express");
+const { BookModel } = require("../model/Book.model");
 
 const bookRoutes = express.Router();
 
 
 
-bookRoutes.post("/createBook",(req,res)=>{
-    console.log({msg:"book added succesfully"})
+bookRoutes.post("/createBook",async(req,res)=>{
+    const payload = req.body;
+    try {
+        const book = new BookModel(payload);
+        await book.save()
+        console.log({msg:"book added succesfully"})
+        res.send({msg:"book added succesfully"})
+    } catch (error) {
+        console.log({error:error.message})
+    }
 })
 
 
