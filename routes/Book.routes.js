@@ -19,18 +19,29 @@ bookRoutes.post("/createBook",async(req,res)=>{
 
 
 bookRoutes.get("/",async(req,res)=>{
+    const bookID = req.params.id;
     const payload = (req.body)
     try {
-        const books = await BookModel.find(payload);
-        res.send(books);
-        console.log({msg:"all books"})
+        if(bookID){
+            const book = await BookModel.findById({_id:bookID});
+            if (book) {
+                res.send(book);
+                console.log({ msg: "Book found by ID" });
+            } else {
+                res.status(404).json({ msg: "Book not found" });
+            }
+        }else{
+            const books = await BookModel.find(payload);
+            res.send(books);
+            console.log({msg:"all books"})
+        }
     } catch (error) {
         console.log({error:error.message})
     }
 })
 
 
-bookRoutes.patch("/update/:id",async(req,res)=>{
+bookRoutes.put("/update/:id",async(req,res)=>{
     const payload = req.body;
     const bookID = req.params.id;
     try {
