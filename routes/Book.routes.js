@@ -18,8 +18,15 @@ bookRoutes.post("/createBook",async(req,res)=>{
 })
 
 
-bookRoutes.get("/",(req,res)=>{
-    console.log({msg:"all books"})
+bookRoutes.get("/",async(req,res)=>{
+    const payload = (req.body)
+    try {
+        const books = await BookModel.find(payload);
+        res.send(books);
+        console.log({msg:"all books"})
+    } catch (error) {
+        console.log({error:error.message})
+    }
 })
 
 
