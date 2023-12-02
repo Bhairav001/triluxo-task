@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { connection } = require("./config/db");
+const { bookRoutes } = require("./routes/Book.routes");
 const app = express()
 
 require("dotenv").config()
@@ -9,6 +10,11 @@ app.get("/",(req,res)=>{
 })
 
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
+
+app.use("/book",bookRoutes);
 
 app.listen(process.env.PORT,async()=>{
     try {
